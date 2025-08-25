@@ -17,12 +17,20 @@ app.post("/send", async (req, res) => {
     }
   });
 
+  // const mailOptions = {
+  //   from: email,
+  //   to: process.env.GMAIL_USER,
+  //   subject: `Message from ${name}`,
+  //   text: message
+  // };
+
   const mailOptions = {
-    from: email,
-    to: process.env.GMAIL_USER,
-    subject: `Message from ${name}`,
-    text: message
-  };
+  from: process.env.GMAIL_USER, // must match authenticated Gmail
+  to: process.env.GMAIL_USER,   // your inbox
+  subject: `Message from ${name}`,
+  text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
+  replyTo: email // this sets the user's email for reply
+};
 
   try {
     await transporter.sendMail(mailOptions);
