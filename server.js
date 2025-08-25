@@ -39,7 +39,7 @@ app.post("/send", async (req, res) => {
         <p>${message}</p>
       </div>
     </div>
-  `
+  `,
   replyTo: email // this sets the user's email for reply
 };
 
