@@ -32,260 +32,187 @@ app.post("/send", async (req, res) => {
   html: `
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Form Submission</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .email-card {
-            width: 100%;
-            max-width: 700px;
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        .email-header {
-            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .header-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 30px;
-        }
-        
-        .email-header h2 {
-            font-weight: 600;
-            font-size: 26px;
-            margin-bottom: 10px;
-        }
-        
-        .email-header p {
-            opacity: 0.9;
-            font-size: 16px;
-        }
-        
-        .header-decoration {
-            position: absolute;
-            bottom: -30px;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: #fff;
-            border-radius: 50% 50% 0 0;
-        }
-        
-        .email-body {
-            padding: 40px;
-            background: #fff;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .info-card {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #4776E6;
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(71, 118, 230, 0.1);
-        }
-        
-        .info-card .label {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .info-card .label i {
-            margin-right: 8px;
-            color: #4776E6;
-        }
-        
-        .info-card .value {
-            font-size: 18px;
-            color: #333;
-            font-weight: 500;
-        }
-        
-        .message-section {
-            margin-top: 10px;
-        }
-        
-        .message-section .label {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .message-section .label i {
-            margin-right: 8px;
-            color: #4776E6;
-        }
-        
-        .message-content {
-            background: #f8f9ff;
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #8E54E9;
-            font-size: 16px;
-            line-height: 1.6;
-            color: #444;
-        }
-        
-        .email-footer {
-            background: #f5f7fa;
-            padding: 25px;
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            border-top: 1px solid #eee;
-        }
-        
-        .footer-links {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        
-        .footer-links a {
-            color: #4776E6;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: #8E54E9;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @media (max-width: 650px) {
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .email-body {
-                padding: 25px;
-            }
-            
-            .email-header {
-                padding: 25px 20px;
-            }
-        }
-    </style>
 </head>
-<body>
-    <div class="email-card">
-        <div class="email-header">
-            <div class="header-content">
-                <div class="header-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h2>New Contact Form Submission</h2>
-                <p>You've received a new message from your website</p>
-            </div>
-            <div class="header-decoration"></div>
-        </div>
-        
-        <div class="email-body">
-            <div class="info-grid">
-                <div class="info-card">
-                    <div class="label">
-                        <i class="fas fa-user"></i>
-                        Name
-                    </div>
-                    <div class="value">${name}</div>
-                </div>
-                
-                <div class="info-card">
-                    <div class="label">
-                        <i class="fas fa-envelope"></i>
-                        Email Address
-                    </div>
-                    <div class="value">${email}</div>
-                </div>
-            </div>
-            
-            <div class="message-section">
-                <div class="label">
-                    <i class="fas fa-comment"></i>
-                    Message
-                </div>
-                <div class="message-content">
-                    <p>${message}</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="email-footer">
-            <p>This email was sent from your website's contact form. Please do not reply to this automated message.</p>
-            <div class="footer-links">
-                <a href="#">View in Browser</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Unsubscribe</a>
-            </div>
-        </div>
-    </div>
+
+<body style="margin: 0; padding: 0; background-color: #f5f7fa; font-family: Arial, sans-serif;">
+    <!-- MAIN CONTAINER TABLE -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f5f7fa">
+        <tr>
+            <td align="center" style="padding: 20px;">
+                <!-- CARD TABLE -->
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff"
+                    style="max-width: 700px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-radius: 30px;">
+                    <!-- HEADER SECTION -->
+                    <tr>
+                        <td align="center" bgcolor="#4776E6"
+                            background="https://img.freepik.com/free-vector/gradient-blue-background_23-2149333532.jpg"
+                            style="background: linear-gradient(to right, #4776E6, #8E54E9); padding: 30px 20px; position: relative; border-top-left-radius: 30px; border-top-right-radius: 30px;">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" style="padding-bottom: 20px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="70" height="70"
+                                            style="background-color: rgba(255,255,255,0.2); border-radius: 50%;">
+                                            <tr>
+                                                <td align="center" style="color: #ffffff; font-size: 30px;">
+                                                    ✉
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"
+                                        style="color: #ffffff; font-size: 26px; font-weight: bold; font-family: Arial, sans-serif;">
+                                        New Contact Form Submission
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center"
+                                        style="color: #ffffff; font-size: 16px; padding-top: 10px; font-family: Arial, sans-serif;">
+                                        You've received a new message from your website
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- BODY CONTENT -->
+                    <tr>
+                        <td align="center" style="padding: 40px 30px 30px 30px;">
+                            <!-- INFO GRID -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <!-- NAME CARD -->
+                                    <td width="50%" align="center" valign="top" style="padding-bottom: 20px;">
+                                        <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f8f9ff"
+                                            style="border-radius: 8px; border-left: 4px solid #4776E6;">
+                                            <tr>
+                                                <td style="padding: 20px;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td
+                                                                style="color: #777777; font-size: 14px; padding-bottom: 8px; font-family: Arial, sans-serif;">
+                                                                <span style="color: #4776E6;"><i class="fas fa-user"></i></span> Name
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td
+                                                                style="color: #333333; font-size: 18px; font-weight: bold; font-family: Arial, sans-serif;">
+                                                                ${name}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <!-- EMAIL CARD -->
+                                    <td width="50%" align="center" valign="top" style="padding-bottom: 20px;">
+                                        <table width="90%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f8f9ff"
+                                            style="border-radius: 8px; border-left: 4px solid #4776E6;">
+                                            <tr>
+                                                <td style="padding: 20px;">
+                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                        <tr>
+                                                            <td
+                                                                style="color: #777777; font-size: 14px; padding-bottom: 8px; font-family: Arial, sans-serif;">
+                                                                <span style="color: #4776E6;"><i class="fas fa-envelope"></i></span> Email Address
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td
+                                                                style="color: #333333; font-size: 18px; font-weight: bold; font-family: Arial, sans-serif;">
+                                                                ${email}
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- MESSAGE SECTION -->
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="padding: 10px 0 15px 0;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td
+                                                    style="color: #777777; font-size: 14px; font-family: Arial, sans-serif;">
+                                                    <span style="color: #4776E6;"><i class="fas fa-comment"></i></span> Message
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f8f9ff"
+                                            style="border-radius: 8px; border-left: 4px solid #8E54E9;">
+                                            <tr>
+                                                <td
+                                                    style="padding: 20px; color: #444444; font-size: 16px; line-height: 1.6; font-family: Arial, sans-serif;">
+                                                    ${message}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- FOOTER SECTION -->
+                    <tr>
+                        <td bgcolor="#f5f7fa" style="padding: 25px 30px; border-top: 1px solid #eeeeee;">
+                            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center"
+                                        style="color: #777777; font-size: 14px; line-height: 1.5; font-family: Arial, sans-serif;">
+                                        This email was sent from your website's contact form. Please do not reply to
+                                        this automated message.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-top: 15px;">
+                                        <table border="0" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td style="padding: 0 10px;">
+                                                    <a href="#"
+                                                        style="color: #4776E6; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">View
+                                                        in Browser</a>
+                                                </td>
+                                                <td style="padding: 0 10px;">
+                                                    <a href="#"
+                                                        style="color: #4776E6; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Privacy
+                                                        Policy</a>
+                                                </td>
+                                                <td style="padding: 0 10px;">
+                                                    <a href="#"
+                                                        style="color: #4776E6; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">Unsubscribe</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
+
 </html>
 `,
   replyTo: email // this sets the user's email for reply
