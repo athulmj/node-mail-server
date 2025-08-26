@@ -285,16 +285,6 @@ app.post("/send", async (req, res) => {
             </div>
         </div>
     </div>
-    
-    <script>
-        // Simple animation on load
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.info-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
-    </script>
 </body>
 </html>
 `,
