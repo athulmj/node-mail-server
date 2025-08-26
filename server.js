@@ -187,7 +187,7 @@ app.post("/send", async (req, res) => {
                                         <table border="0" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td style="padding: 0 10px;">
-                                                    <a href="#"
+                                                    <a href="https://athulmj.github.io/portfolio/"
                                                         style="color: #4776E6; text-decoration: none; font-size: 13px; font-family: Arial, sans-serif;">View
                                                         in Browser</a>
                                                 </td>
